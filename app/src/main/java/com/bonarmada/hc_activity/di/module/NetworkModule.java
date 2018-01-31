@@ -58,6 +58,7 @@ public class NetworkModule {
 
                 HttpUrl url = originalHttpUrl.newBuilder()
                         .addQueryParameter("appid", Constants.API_KEY)
+                        .addQueryParameter("units", Constants.METRIC)
                         .build();
 
                 // Request customization: add request headers

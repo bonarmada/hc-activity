@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Empty state ui-->
+    <LinearLayout
+        android:id="@+id/empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_lilac"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:visibility="visible">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ico_cloud" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/TextAppearance.AppCompat.Display2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="Nothing selected"
+            android:textColor="@color/magnesium" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/top_container"
+            android:layout_width="match_parent"
+            android:background="@color/peach"
+            android:padding="16dp"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/ivIcon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:drawablePadding="4dp"
+                android:layout_above="@id/tvCaption"
+                android:src="@drawable/icon_air"
+                android:text="300 m/s" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvDescription"
+                android:layout_toRightOf="@id/ivIcon"
+                android:layout_marginLeft="4dp"
+                style="@style/TextAppearance.AppCompat.Display1"
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clouds"
+                android:textColor="#FFF" />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvCaption"
+                android:layout_marginLeft="4dp"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_below="@id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:text="scattered clouds"
+                android:textColor="#FFF" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvTemperature"
+                style="@style/TextAppearance.AppCompat.Display4"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="45"
+                android:textColor="#FFF" />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/degree"
+                android:layout_marginLeft="4dp"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_alignTop="@id/tvTemperature"
+                android:layout_toRightOf="@id/tvTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:text="o"
+                android:textColor="#FFF" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvWind"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="300 m/s"
+                    android:textColor="@color/textColorSecondary" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:drawablePadding="4dp"
+                    android:src="@drawable/icon_air"
+                    android:text="300 m/s"
+                    android:tint="@color/magnesium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvPressure"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="300 m/s"
+                    android:textColor="@color/textColorSecondary" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:drawablePadding="4dp"
+                    android:src="@drawable/icon_pressure"
+                    android:text="300 m/s"
+                    android:tint="@color/magnesium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvHumidity"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="300 m/s"
+                    android:textColor="@color/textColorSecondary" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:drawablePadding="4dp"
+                    android:src="@drawable/icon_humidity"
+                    android:text="300 m/s"
+                    android:tint="@color/magnesium" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

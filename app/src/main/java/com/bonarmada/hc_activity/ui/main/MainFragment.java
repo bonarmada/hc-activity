@@ -3,6 +3,7 @@ package com.bonarmada.hc_activity.ui.main;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,7 +29,11 @@ import butterknife.ButterKnife;
  * Created by bonbonme on 1/30/2018.
  */
 
-public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, MainAdapter.AdapterListener, MainPresenter {
+
+    public interface MainFragmentListener {
+        void onItemClick(int id);
+    }
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -41,6 +46,13 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private MainAdapter adapter;
     private MainViewModel viewModel;
+    private MainFragmentListener listener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.listener = (MainFragmentListener) getActivity();
+    }
 
     @Nullable
     @Override
@@ -77,6 +89,7 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         viewModel.weatherDataList.observe(this, new Observer<List<WeatherData>>() {
             @Override
             public void onChanged(@Nullable List<WeatherData> weatherData) {
+                onKillEvent();
                 adapter.refresh(weatherData);
             }
         });
@@ -93,13 +106,30 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         refreshLayout.setOnRefreshListener(this);
 
         // Recycler
-        adapter = new MainAdapter(getActivity(), null);
+        adapter = new MainAdapter(getActivity(), null, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
     public void onRefresh() {
+        onDispatchEvent();
         viewModel.getMultipleWeatherData();
+    }
+
+    @Override
+    public void onItemClick(int position, int id) {
+        listener.onItemClick(id);
+    }
+
+
+    @Override
+    public void onDispatchEvent() {
+        viewModel.networkProcessIndicator.setValue(true);
+    }
+
+    @Override
+    public void onKillEvent() {
+        viewModel.networkProcessIndicator.setValue(false);
     }
 }

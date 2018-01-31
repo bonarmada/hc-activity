@@ -2,6 +2,7 @@ package com.bonarmada.hc_activity.di.component;
 
 
 import com.bonarmada.hc_activity.di.module.ViewModelModule;
+import com.bonarmada.hc_activity.ui.detail.DetailFragment;
 import com.bonarmada.hc_activity.ui.main.MainActivity;
 import com.bonarmada.hc_activity.di.module.DaoModule;
 import com.bonarmada.hc_activity.di.module.RemoteModule;
@@ -20,4 +21,5 @@ import dagger.Component;
 public interface AppComponent {
     void inject(MainActivity activity);
     void inject(MainFragment activity);
+    void inject(DetailFragment activity);
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bonarmada.hc_activity.R;
 import com.bonarmada.hc_activity.data.vo.WeatherData;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,14 +24,19 @@ import butterknife.ButterKnife;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
+    public interface AdapterListener {
+        void onItemClick(int position, int id);
+    }
+
     private static Context context;
     private List<WeatherData> weatherDataList;
-//    private AdapterListener listener;
+    private AdapterListener listener;
 
 
-    public MainAdapter(Context context, List<WeatherData> weatherDataList) {
+    public MainAdapter(Context context, List<WeatherData> weatherDataList, AdapterListener listener) {
         this.weatherDataList = weatherDataList;
         this.context = context;
+        this.listener = listener;
     }
 
     public void refresh(List<WeatherData> weatherDataList) {
@@ -48,12 +54,21 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final WeatherData weatherData = weatherDataList.get(position);
 
+        DecimalFormat numberFormat = new DecimalFormat("#.0");
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClick(position, weatherData.getId());
+            }
+        });
+        holder.tvCityName.setText(weatherData.getName());
         holder.tvHumidity.setText(weatherData.getMain().getHumidity().toString());
         holder.tvPressure.setText(weatherData.getMain().getPressure().toString());
-        holder.tvTemperature.setText(weatherData.getMain().getTemp().toString());
+        holder.tvTemperature.setText(numberFormat.format(weatherData.getMain().getTemp()).toString());
         holder.tvWind.setText(weatherData.getWind().getSpeed().toString());
     }
 
@@ -67,6 +82,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         AppCompatTextView tvTemperature;
         @BindView(R.id.tvWind)
         AppCompatTextView tvWind;
+        @BindView(R.id.tvCityName)
+        AppCompatTextView tvCityName;
 
         public ViewHolder(View view) {
             super(view);

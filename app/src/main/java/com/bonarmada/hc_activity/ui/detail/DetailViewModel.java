@@ -1,15 +1,15 @@
-package com.bonarmada.hc_activity.ui.main;
+package com.bonarmada.hc_activity.ui.detail;
 
 import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
-import android.util.Log;
 
 import com.bonarmada.hc_activity.data.dao.RealmLiveData;
 import com.bonarmada.hc_activity.data.repository.WeatherDataRepository;
 import com.bonarmada.hc_activity.data.vo.WeatherData;
+import com.bonarmada.hc_activity.ui.main.MainPresenter;
 
 import java.util.List;
 
@@ -21,39 +21,49 @@ import io.realm.RealmResults;
  * Created by bonbonme on 1/30/2018.
  */
 
-public class MainViewModel extends ViewModel implements MainPresenter {
+public class DetailViewModel extends ViewModel implements MainPresenter {
 
-    public LiveData<List<WeatherData>> weatherDataList;
+    private int weatherDataId;
     public LiveData<WeatherData> weatherData;
-    public MutableLiveData<List<WeatherData>> mWeatherDataList = new MutableLiveData<>();
     public MutableLiveData<Boolean> networkProcessIndicator = new MutableLiveData<>();
 
     WeatherDataRepository repository;
 
     @Inject
-    public MainViewModel(WeatherDataRepository repository) {
+    public DetailViewModel(WeatherDataRepository repository) {
         this.repository = repository;
-
         subscribeToWeatherData();
     }
 
 
     private void subscribeToWeatherData() {
         RealmLiveData<WeatherData> liveWeatherData = this.repository.dao.getAsLiveData();
-        weatherDataList = Transformations.map(liveWeatherData, new Function<RealmResults<WeatherData>, List<WeatherData>>() {
+
+        weatherData = Transformations.map(liveWeatherData, new Function<RealmResults<WeatherData>, WeatherData>() {
             @Override
-            public List<WeatherData> apply(RealmResults<WeatherData> input) {
-                Log.e("asd", input.toString());
-                return repository.dao.get();
+            public WeatherData apply(RealmResults<WeatherData> input) {
+                onKillEvent();
+                return repository.dao.get(weatherDataId);
             }
         });
-
     }
 
 
-    public void getMultipleWeatherData() {
+    public void getWeatherData() {
         this.onDispatchEvent();
-        repository.getMultipleWeatherData();
+        repository.getWeatherData(this.weatherDataId);
+    }
+
+    public int getWeatherDataId() {
+        return weatherDataId;
+    }
+
+    public void setWeatherDataId(int weatherDataId) {
+        this.weatherDataId = weatherDataId;
+    }
+
+    public void setWeatherData(LiveData<WeatherData> weatherData) {
+        this.weatherData = weatherData;
     }
 
     @Override

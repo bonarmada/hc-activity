@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="160dp"
+    android:layout_margin="8dp"
     android:background="@android:color/white"
-    android:orientation="vertical"
-    android:layout_margin="8dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,58 +14,125 @@
 
         <LinearLayout
             android:id="@+id/left_container"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center"
+            android:layout_weight="1"
             android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tvWind"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_air"
-                android:drawablePadding="4dp"
-                android:text="Wind sample" />
+                android:orientation="horizontal">
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tvPressure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_pressure"
-                android:drawablePadding="4dp"
-                android:text="Wind sample" />
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_toLeftOf="@id/tvWind"
+                    android:drawablePadding="4dp"
+                    android:src="@drawable/icon_air"
+                    android:tint="@color/magnesium" />
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tvHumidity"
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvWind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="4dp"
+                    android:text="Wind sample" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_toLeftOf="@id/tvPressure"
+                    android:drawablePadding="4dp"
+                    android:src="@drawable/icon_air"
+                    android:tint="@color/magnesium" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvPressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvWind"
+                    android:drawablePadding="4dp"
+                    android:text="123" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_humidity"
-                android:drawablePadding="4dp"
-                android:text="Wind sample" />
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_toLeftOf="@id/tvHumidity"
+                    android:drawablePadding="4dp"
+                    android:src="@drawable/icon_air"
+                    android:tint="@color/magnesium" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvPressure"
+                    android:drawablePadding="4dp"
+                    android:text="Wind sample" />
+            </LinearLayout>
 
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/right_container"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="#FEC492"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_weight="2"
+            android:background="@color/malibu"
+            android:padding="8dp">
 
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvCityName"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:ellipsize="end"
+                android:text="London"
+                android:textColor="#FFF" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvTemperature"
                 style="@style/TextAppearance.AppCompat.Display2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:drawablePadding="4dp"
                 android:text="45"
                 android:textColor="#FFF" />
-        </LinearLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tvTemperature"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/tvTemperature"
+                android:drawablePadding="4dp"
+                android:text="o"
+                android:textColor="#FFF" />
+        </RelativeLayout>
 
     </LinearLayout>
 

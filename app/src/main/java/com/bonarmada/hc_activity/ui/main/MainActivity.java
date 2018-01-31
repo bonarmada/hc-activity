@@ -1,20 +1,19 @@
 package com.bonarmada.hc_activity.ui.main;
 
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.bonarmada.hc_activity.App;
 import com.bonarmada.hc_activity.R;
-import com.bonarmada.hc_activity.data.dao.WeatherDataDao;
-
-import javax.inject.Inject;
+import com.bonarmada.hc_activity.ui.detail.DetailActivity;
+import com.bonarmada.hc_activity.ui.detail.DetailFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainFragment.MainFragmentListener {
 
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout coordinatorLayout;
@@ -25,14 +24,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-
-        ((App) getApplication()).getComponent().inject(this);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    public void onItemClick(int id) {
+        DetailFragment detailFragment= (DetailFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.detailFragment);
 
+        // Check whether fragment exists within the activity.. aka multi pane mode.
+        if (detailFragment != null){
+            detailFragment.onListItemSelected(id);
+            return;
+        }
 
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("cityId", id);
+        startActivity(intent);
     }
 }
